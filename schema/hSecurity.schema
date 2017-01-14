@@ -1,0 +1,136 @@
+#custom.schema
+# OID Prefix : 1.3.6.1.4.1.9999
+# Attributes : 1.3.6.1.4.1.9999.1
+# Object Classes: 1.3.6.1.4.1.9999.2
+#
+# Description: Create for custom specific requirements.
+# Created by: Security Guy on 2012-09-05
+# Modified by Security Guy on 2012-10-18
+#
+# Depends upon
+#
+# InetOrgPerson [RFC 2798 - Definition of the inetOrgPerson LDAP Object Class]
+
+# hEnabledPasswordChange, type integer, single-value
+# This is a single valued interger field (0 or 1) used to keep value.
+# associated with an individual - {1} means 1 char value
+attributetype ( 1.3.6.1.4.1.9999.1.1
+        NAME 'hEnablePasswordChange'
+        DESC 'Enable Web Password Change'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{1}
+        SINGLE-VALUE )
+
+# hEnablePasswordLock, type integer, single-value
+attributetype ( 1.3.6.1.4.1.9999.1.2
+        NAME 'hEnablePasswordLock'
+        DESC 'Lock account for Web Password Change'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{1}
+        SINGLE-VALUE )
+
+# hPasswordSecretA, type string (text)
+# Multi-valued, keeps SHA (hPasswordSecretA)
+attributetype ( 1.3.6.1.4.1.9999.1.3
+        NAME 'hPasswordSecretA'
+        DESC 'SHA encoding of secret answer A'
+        EQUALITY caseIgnoreMatch
+        SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024}
+        SUP name
+        SINGLE-VALUE )
+
+# hPasswordSecretB, type string (text)
+# Single-valued fild, keeps SHA (hPasswordSecretB).
+attributetype ( 1.3.6.1.4.1.9999.1.4
+        NAME 'hPasswordSecretB'
+        DESC 'SHA encoding of secret answer B'
+        EQUALITY caseIgnoreMatch
+        SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024}
+        SUP name
+        SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.9999.1.5
+        NAME 'hAccountInitialSetup'
+        DESC 'Account Had Ininitial Setup Done'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{1}
+        SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.9999.1.6
+        NAME 'hAccountSetupDate'
+        DESC 'Date of Account Setup'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{12}
+        SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.9999.1.7
+        NAME 'hAllowPasswordChange'
+        DESC 'Allow or Deny Web Password Change'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{1}
+        SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.9999.1.8
+        NAME 'hPasswordTries'
+        DESC 'Web Password Change Tries'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{5}
+        SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.9999.1.9
+        NAME 'SelfServiceLastPasswordChange'
+        DESC 'SelfService Date of Last Pass Change'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{12}
+        SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.9999.1.10
+        NAME 'hAccountCreateDate'
+        DESC 'Date of Account Creation'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{12}
+        SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.9999.1.11
+        NAME 'SelfSeviceLastHashLink'
+        DESC 'Last SelfService Link sent to user'
+        EQUALITY caseIgnoreMatch
+        SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024}
+        SUP name
+        SINGLE-VALUE )
+
+# SelfServiceSentEmail, type integer, single-value
+attributetype ( 1.3.6.1.4.1.9999.1.12
+        NAME 'SelfServiceSentEmail'
+        DESC 'Was Email sent to user'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{1}
+        SINGLE-VALUE )
+
+# SelfServiceAccountLocked, type integer, single-value
+attributetype ( 1.3.6.1.4.1.9999.1.13
+        NAME 'SelfServiceAccountLocked'
+        DESC 'User is Locked'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{1}
+        SINGLE-VALUE )
+
+# hStatus, type integer, single-value
+attributetype ( 1.3.6.1.4.1.9999.1.14
+        NAME 'hStatus'
+        DESC 'User status'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{1}
+        SINGLE-VALUE )
+
+objectclass ( 1.3.6.1.4.1.9999.2.1
+        NAME 'hSecurity'
+        DESC 'Hostopia Security Schema'
+        SUP top
+        AUXILIARY
+        MAY (
+         cn $ hEnablePasswordChange $ hEnablePasswordLock $ hPasswordSecretA $ hPasswordSecretB $ hAccountInitialSetup $ hAccountSetupDate $ hAllowPasswordChange $ hPasswordTries $ hStatus $ SelfServiceLastPasswordChange $ hAccountCreateDate $ SelfSeviceLastHashLink $ SelfServiceSentEmail $ SelfServiceAccountLocked )
+        )
