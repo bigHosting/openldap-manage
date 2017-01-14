@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 #
-# (c) Security Guy gvasiliu@hostopia.com 2015.01.21
+# (c) Security Guy 2015.01.21
 #
 
 use strict;
